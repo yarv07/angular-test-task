@@ -1,0 +1,44 @@
+<main class="main">
+  <h2>ANGULAR CODE TASK</h2>
+
+  <span>
+    <button id="btnLoad" (click)="loadData()">
+      Click to load work orders data
+    </button>
+  </span>
+
+  <br />
+  <label *ngIf="filteredData.length > 0 && !searchDataFilter">
+     Search for work orders by description:
+    <input
+      [(ngModel)]="searchData"
+      id="searchInput"
+      type="text"
+    /><button id="btnSearch" type="button" (click)="filter(searchData)">search</button>
+  </label>
+
+  <span *ngIf="searchDataFilter">
+    Work orders with: {{searchDataFilter}} 
+    <button id="btnClear" type="button" (click)="clearFilter()">
+      clear
+    </button>
+  </span>
+
+  <br/>
+
+  <div *ngIf="filteredData.length > 0">
+    <table id="table">
+      <tr>
+        <th *ngFor="let column of headlines">
+          {{ column }}
+        </th>
+      </tr>
+      <tr *ngFor="let row of filteredData; let idx = index">
+        <td *ngFor="let column of headlines">
+          {{ row[column] }}
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</main>
